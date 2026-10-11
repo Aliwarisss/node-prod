@@ -1,0 +1,1503 @@
+{
+  "id": "product-business-operating-system",
+  "title": "Business Operating System",
+  "slug": "business-operating-system",
+  "status": "active",
+  "owner": "Chief Product Officer",
+  "summary": "Single product workspace that stores structured PRDs for concrete business modules before roadmap generation begins.",
+  "description": "The Business Operating System is the umbrella platform for ERP, CRM, HRM, SCM, CX, GRC, ITSM, BI, work management, and marketing modules. This seed focuses on concrete PRDs that can be reviewed, approved, and later expanded into roadmap execution.",
+  "modules": [
+    "ERP",
+    "CRM",
+    "HRM",
+    "SCM",
+    "CX"
+  ],
+  "order": 0,
+  "prds": [
+    {
+      "id": "prd-crm-lead-intake-and-qualification",
+      "title": "CRM Lead Intake and Qualification",
+      "status": "in_review",
+      "version": "v0.6",
+      "productId": "product-business-operating-system",
+      "module": "CRM",
+      "owner": "CRM Product Manager",
+      "authors": [
+        "CRM Product Manager",
+        "Sales Systems Analyst"
+      ],
+      "reviewers": [
+        "Engineering Lead",
+        "Design Lead",
+        "Sales Director"
+      ],
+      "stakeholders": [
+        "VP Sales",
+        "Revenue Operations",
+        "Customer Success"
+      ],
+      "createdAt": "2026-07-01T09:00:00.000Z",
+      "updatedAt": "2026-07-01T12:00:00.000Z",
+      "targetRelease": "2026-Q3 Alpha",
+      "summary": {
+        "oneLiner": "Define the first CRM flow that captures leads, qualifies them, and promotes qualified demand into a usable pipeline record.",
+        "description": "This PRD covers the operational path from inbound lead creation to qualification outcome so sales teams stop managing early funnel work in spreadsheets and chat threads.",
+        "whyNow": "BOS needs a credible CRM foundation before opportunity, forecasting, and account planning flows can be layered on top.",
+        "expectedOutcome": "Sales can review lead source, ownership, qualification reason, and next action from one workflow."
+      },
+      "problem": {
+        "statement": "Early-stage demand handling is fragmented and inconsistent, so qualified opportunities arrive in the pipeline without reliable source or ownership context.",
+        "currentPain": "Leads are copied between forms, sheets, and messaging tools. Qualification notes are often incomplete or lost.",
+        "businessImpact": "Sales leadership cannot trust funnel conversion metrics or coach reps from a consistent qualification standard.",
+        "userImpact": "Sellers waste time reconstructing context before they can act, while managers cannot tell why leads are stalling.",
+        "currentWorkarounds": "Teams keep manual lead sheets, forward screenshots, and rely on memory during pipeline reviews.",
+        "opportunity": "A structured intake and qualification workflow creates the reusable foundation for downstream CRM modules."
+      },
+      "vision": {
+        "statement": "Every lead enters CRM with usable context and exits qualification with a deliberate outcome.",
+        "futureState": "Sales operations can inspect the whole intake funnel, and individual sellers can confidently pick up the next best lead without hidden context.",
+        "principles": [
+          "Capture context once at the source",
+          "Make qualification decisions explicit",
+          "Preserve ownership and activity traceability"
+        ]
+      },
+      "goals": [
+        {
+          "id": "goal-crm-funnel-control",
+          "title": "Create controlled lead intake",
+          "description": "Standardize the minimum information required to create and work a lead.",
+          "type": "business",
+          "priority": "high"
+        },
+        {
+          "id": "goal-crm-qualification-consistency",
+          "title": "Make qualification outcomes consistent",
+          "description": "Require explicit outcomes, notes, and ownership changes so managers can audit funnel hygiene.",
+          "type": "operational",
+          "priority": "high"
+        }
+      ],
+      "successMetrics": [
+        {
+          "id": "metric-crm-complete-intake",
+          "metric": "Leads created with full required context",
+          "target": "95%+",
+          "measurementMethod": "Weekly audit of new lead records",
+          "priority": "high"
+        },
+        {
+          "id": "metric-crm-qualified-cycle-time",
+          "metric": "Median time from new lead to qualification decision",
+          "target": "< 48 hours",
+          "measurementMethod": "CRM event timestamps",
+          "priority": "medium"
+        }
+      ],
+      "targetUsers": [
+        {
+          "id": "persona-crm-sdr",
+          "role": "Sales Development Representative",
+          "description": "Works inbound leads, qualifies them, and decides whether to progress or disqualify.",
+          "goals": [
+            "Quickly understand lead context",
+            "Keep queue clean"
+          ],
+          "painPoints": [
+            "Missing source details",
+            "Unclear ownership after reassignment"
+          ],
+          "mainActions": [
+            "Create lead",
+            "Update qualification",
+            "Log notes"
+          ],
+          "permissionsNeeded": [
+            "Create leads",
+            "Edit owned leads",
+            "View qualification history"
+          ]
+        },
+        {
+          "id": "persona-crm-revops",
+          "role": "Revenue Operations Manager",
+          "description": "Monitors funnel health and audits whether qualification standards are followed.",
+          "goals": [
+            "Trust conversion metrics",
+            "Spot stale leads"
+          ],
+          "painPoints": [
+            "Inconsistent notes",
+            "No reliable disqualification reason"
+          ],
+          "mainActions": [
+            "Filter by source",
+            "Audit owner changes",
+            "Review outcomes"
+          ],
+          "permissionsNeeded": [
+            "View all leads",
+            "Export reports",
+            "Adjust lead workflow settings"
+          ]
+        }
+      ],
+      "scope": {
+        "inScope": [
+          "Lead creation with required source and owner",
+          "Qualification and disqualification outcomes",
+          "Lead activity history",
+          "Lead queue filters for reps and revops"
+        ],
+        "outOfScope": [
+          "Marketing attribution modeling",
+          "Account planning",
+          "Opportunity forecasting"
+        ],
+        "mvpScope": [
+          "Manual lead creation",
+          "Qualification decision tracking",
+          "Owner and history visibility"
+        ],
+        "futureScope": [
+          "Automated enrichment",
+          "Scoring",
+          "Routing based on territory rules"
+        ]
+      },
+      "capabilities": [
+        {
+          "id": "capability-crm-intake",
+          "title": "Structured lead intake",
+          "description": "Create leads with enough context for a seller to act immediately.",
+          "outcome": "Every new lead enters the queue with clear source, owner, and next action.",
+          "priority": "high",
+          "relatedUsers": [
+            "persona-crm-sdr",
+            "persona-crm-revops"
+          ],
+          "relatedRequirementIds": [
+            "req-crm-source-owner",
+            "req-crm-required-fields",
+            "req-crm-lead-history"
+          ]
+        },
+        {
+          "id": "capability-crm-qualification",
+          "title": "Qualification decision control",
+          "description": "Require a deliberate qualification outcome and preserve the reason behind it.",
+          "outcome": "Managers can review the funnel without guessing why leads moved or stalled.",
+          "priority": "high",
+          "relatedUsers": [
+            "persona-crm-sdr",
+            "persona-crm-revops"
+          ],
+          "relatedRequirementIds": [
+            "req-crm-qualification-state",
+            "req-crm-disqualification-reason",
+            "req-crm-manager-filters"
+          ]
+        }
+      ],
+      "highLevelUseCases": [
+        {
+          "id": "usecase-crm-create-lead",
+          "title": "Create and assign inbound lead",
+          "actor": "Sales Development Representative",
+          "goal": "Enter a new lead and immediately assign it for work",
+          "preconditions": [
+            "Lead source is known",
+            "Rep has create permission"
+          ],
+          "flow": [
+            "Rep opens the lead form",
+            "Rep enters company, contact, source, and owner",
+            "System validates required fields and creates the lead"
+          ],
+          "outcome": "Lead appears in the owned queue with activity history started.",
+          "relatedCapabilityIds": [
+            "capability-crm-intake"
+          ],
+          "relatedRequirementIds": [
+            "req-crm-source-owner",
+            "req-crm-required-fields"
+          ]
+        },
+        {
+          "id": "usecase-crm-qualify-lead",
+          "title": "Qualify or disqualify a worked lead",
+          "actor": "Sales Development Representative",
+          "goal": "Record a clear qualification decision after outreach",
+          "preconditions": [
+            "Lead already exists",
+            "Rep is owner or manager"
+          ],
+          "flow": [
+            "Rep opens the lead record",
+            "Rep updates status to qualified or disqualified",
+            "Rep logs reason and next action when required"
+          ],
+          "outcome": "Lead outcome is preserved for later funnel review.",
+          "relatedCapabilityIds": [
+            "capability-crm-qualification"
+          ],
+          "relatedRequirementIds": [
+            "req-crm-qualification-state",
+            "req-crm-disqualification-reason",
+            "req-crm-manager-filters"
+          ]
+        }
+      ],
+      "requirementModel": {
+        "businessRequirements": [
+          "req-crm-disqualification-reason",
+          "req-crm-manager-filters"
+        ],
+        "userRequirements": [
+          "req-crm-lead-history"
+        ],
+        "functionalRequirements": [
+          "req-crm-source-owner",
+          "req-crm-required-fields",
+          "req-crm-qualification-state"
+        ],
+        "nonFunctionalRequirements": [],
+        "domainRequirements": [],
+        "dataRequirements": [],
+        "permissionRequirements": [],
+        "integrationRequirements": [],
+        "reportingRequirements": [],
+        "operationalRequirements": [],
+        "complianceRequirements": [],
+        "notes": "Grouped manually for the seed. Admins can regenerate after edits.",
+        "generatedAt": "2026-07-01T12:00:00.000Z"
+      },
+      "requirementItems": [
+        {
+          "id": "req-crm-source-owner",
+          "type": "functional",
+          "title": "Lead must store source and owner",
+          "statement": "Every lead record must be created with source, owner, and created timestamp.",
+          "reason": "Without source and owner, queue accountability and reporting break immediately.",
+          "priority": "high",
+          "source": "Sales operations policy",
+          "relatedCapabilityIds": [
+            "capability-crm-intake"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-crm-create-lead"
+          ],
+          "acceptanceHint": "Lead creation should fail if source or owner is missing.",
+          "status": "draft"
+        },
+        {
+          "id": "req-crm-required-fields",
+          "type": "functional",
+          "title": "Lead creation requires minimum contact context",
+          "statement": "Lead creation must require company or person name, primary contact channel, source, and owner.",
+          "reason": "Sellers cannot act on incomplete records.",
+          "priority": "high",
+          "source": "Lead intake workshop",
+          "relatedCapabilityIds": [
+            "capability-crm-intake"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-crm-create-lead"
+          ],
+          "acceptanceHint": "Form validation should block empty required fields.",
+          "status": "draft"
+        },
+        {
+          "id": "req-crm-qualification-state",
+          "type": "functional",
+          "title": "Qualification outcome must be explicit",
+          "statement": "A worked lead must end in qualified or disqualified state; passive abandonment is not acceptable.",
+          "reason": "Managers need an explicit funnel outcome.",
+          "priority": "high",
+          "source": "Sales management review",
+          "relatedCapabilityIds": [
+            "capability-crm-qualification"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-crm-qualify-lead"
+          ],
+          "acceptanceHint": "Outcome selection should be required before a lead can leave working state.",
+          "status": "draft"
+        },
+        {
+          "id": "req-crm-disqualification-reason",
+          "type": "business",
+          "title": "Disqualified leads require a reason",
+          "statement": "When a lead is disqualified, the rep must choose or enter a reason.",
+          "reason": "Disqualification patterns feed funnel quality analysis and routing improvements.",
+          "priority": "medium",
+          "source": "Revenue operations reporting need",
+          "relatedCapabilityIds": [
+            "capability-crm-qualification"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-crm-qualify-lead"
+          ],
+          "acceptanceHint": "Disqualified leads should show a visible reason in list and detail view.",
+          "status": "draft"
+        },
+        {
+          "id": "req-crm-lead-history",
+          "type": "user",
+          "title": "Lead history must show key actions",
+          "statement": "The record should display owner changes, status changes, and notes in chronological order.",
+          "reason": "Reps and managers need rapid context restoration.",
+          "priority": "medium",
+          "source": "Seller workflow interview",
+          "relatedCapabilityIds": [
+            "capability-crm-intake",
+            "capability-crm-qualification"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-crm-create-lead",
+            "usecase-crm-qualify-lead"
+          ],
+          "acceptanceHint": "History should render newest-first with actor and timestamp.",
+          "status": "draft"
+        },
+        {
+          "id": "req-crm-manager-filters",
+          "type": "business",
+          "title": "Managers need queue filters by outcome and owner",
+          "statement": "Lead list views must support filters for owner, source, stale age, and qualification outcome.",
+          "reason": "Funnel review becomes impractical without controlled filtering.",
+          "priority": "medium",
+          "source": "Pipeline review format",
+          "relatedCapabilityIds": [
+            "capability-crm-qualification"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-crm-qualify-lead"
+          ],
+          "acceptanceHint": "Managers should be able to isolate stale or disqualified leads quickly.",
+          "status": "draft"
+        }
+      ],
+      "domainRules": [
+        {
+          "id": "rule-crm-owner-single",
+          "title": "Single active owner",
+          "rule": "A lead can have only one active owner at a time.",
+          "reason": "Queue accountability depends on one clear working owner.",
+          "priority": "high",
+          "relatedRequirementIds": [
+            "req-crm-source-owner"
+          ]
+        },
+        {
+          "id": "rule-crm-outcome-terminal",
+          "title": "Qualification outcome is terminal until reopened",
+          "rule": "Qualified and disqualified states are terminal unless a manager or owner deliberately reopens the lead.",
+          "reason": "Prevents accidental rework and distorted funnel metrics.",
+          "priority": "medium",
+          "relatedRequirementIds": [
+            "req-crm-qualification-state",
+            "req-crm-disqualification-reason"
+          ]
+        }
+      ],
+      "dataContext": {
+        "coreEntities": [
+          {
+            "id": "entity-crm-lead",
+            "name": "Lead",
+            "description": "Early-stage demand record before opportunity creation.",
+            "keyFields": [
+              "leadId",
+              "source",
+              "ownerId",
+              "status",
+              "createdAt"
+            ],
+            "relationships": [
+              "May convert into Account/Opportunity",
+              "Has many Activity entries"
+            ]
+          },
+          {
+            "id": "entity-crm-activity",
+            "name": "Lead Activity",
+            "description": "Timestamped history line for notes, owner changes, and outcome changes.",
+            "keyFields": [
+              "activityId",
+              "leadId",
+              "type",
+              "actorId",
+              "timestamp"
+            ],
+            "relationships": [
+              "Belongs to Lead"
+            ]
+          }
+        ],
+        "dataOwnership": "Revenue operations owns workflow policy. Sales owns execution data quality.",
+        "dataRetentionNotes": "Lead history should remain queryable for at least 24 months for funnel analysis.",
+        "auditNeeds": "Owner changes, qualification state changes, and disqualification reasons must be auditable."
+      },
+      "uxPrinciples": [
+        "Show queue-critical context in list view before opening detail",
+        "Keep qualification actions visible without hiding them in deep menus",
+        "Make reasons and next steps readable at a glance"
+      ],
+      "constraints": [
+        {
+          "id": "constraint-crm-no-email-sync",
+          "type": "technical",
+          "description": "Do not depend on email sync for MVP context capture.",
+          "impact": "The system must still be usable if external mailbox integration is absent.",
+          "priority": "high"
+        },
+        {
+          "id": "constraint-crm-fast-queue",
+          "type": "operational",
+          "description": "Queue list must remain fast for daily SDR use.",
+          "impact": "Heavy interaction latency will block adoption.",
+          "priority": "medium"
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "dependency-crm-auth-members",
+          "title": "Workspace members and permissions",
+          "type": "internal",
+          "description": "Lead ownership and manager review depend on stable member identity and role access.",
+          "owner": "Platform Core",
+          "riskIfMissing": "Ownership and approval rules cannot be enforced cleanly."
+        },
+        {
+          "id": "dependency-crm-form-engine",
+          "title": "Configurable form components",
+          "type": "internal",
+          "description": "Lead creation relies on reusable form validation and field rendering.",
+          "owner": "Frontend Platform",
+          "riskIfMissing": "Lead intake UI becomes custom-coded and slower to evolve."
+        }
+      ],
+      "risks": [
+        {
+          "id": "risk-crm-overcapture",
+          "title": "Lead form becomes too heavy",
+          "description": "Adding too many required fields could slow reps and reduce adoption.",
+          "impact": "high",
+          "likelihood": "medium",
+          "mitigation": "Limit MVP required fields to the minimum action-enabling set and revisit after usage review.",
+          "owner": "CRM Product Manager"
+        },
+        {
+          "id": "risk-crm-bad-funnel-data",
+          "title": "Qualification reasons become inconsistent",
+          "description": "If reps use free text inconsistently, reporting loses comparability.",
+          "impact": "medium",
+          "likelihood": "high",
+          "mitigation": "Seed a controlled reason list with optional notes instead of fully freeform input.",
+          "owner": "Revenue Operations Manager"
+        }
+      ],
+      "releaseExpectation": {
+        "mvp": "Manual lead intake, owner assignment, qualification outcome, and activity history.",
+        "alpha": "Filtered lead queue with manager visibility and reporting-ready outcome fields.",
+        "beta": "Stronger audit views, reason taxonomy tuning, and controlled reopen flow.",
+        "future": "Routing rules, enrichment, and scoring.",
+        "releaseNotes": "This PRD should unlock the first reliable CRM operational dataset for BOS commercial workflows."
+      },
+      "openQuestions": [
+        {
+          "id": "question-crm-reopen-policy",
+          "question": "Who is allowed to reopen a disqualified lead?",
+          "context": "This affects funnel hygiene, manager workflow, and user permissions.",
+          "owner": "CRM Product Manager",
+          "status": "open",
+          "decisionNeededBy": "Before beta scope lock"
+        }
+      ],
+      "approval": {
+        "productOwner": {
+          "reviewer": "Chief Product Officer",
+          "state": "approved",
+          "notes": "Approved for review track.",
+          "updatedAt": "2026-07-01T11:30:00.000Z"
+        },
+        "domainOwner": {
+          "reviewer": "VP Sales",
+          "state": "approved",
+          "notes": "Commercial flow is aligned.",
+          "updatedAt": "2026-07-01T11:45:00.000Z"
+        },
+        "engineeringLead": {
+          "reviewer": "Platform Engineering Lead",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        },
+        "designLead": {
+          "reviewer": "Design Lead",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        },
+        "qaLead": {
+          "reviewer": "QA Lead",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        }
+      },
+      "changeLog": [
+        {
+          "version": "v0.6",
+          "date": "2026-07-01",
+          "author": "CRM Product Manager",
+          "change": "Tightened qualification outcome rules and added explicit manager filtering requirement."
+        },
+        {
+          "version": "v0.5",
+          "date": "2026-06-30",
+          "author": "Sales Systems Analyst",
+          "change": "Converted discovery notes into structured personas, capabilities, and use cases."
+        }
+      ]
+    },
+    {
+      "id": "prd-hrm-onboarding-and-probation-control",
+      "title": "HRM Onboarding and Probation Control",
+      "status": "draft",
+      "version": "v0.3",
+      "productId": "product-business-operating-system",
+      "module": "HRM",
+      "owner": "HR Product Manager",
+      "authors": [
+        "HR Product Manager",
+        "People Operations Analyst"
+      ],
+      "reviewers": [
+        "Engineering Lead",
+        "People Operations Lead"
+      ],
+      "stakeholders": [
+        "Department Managers",
+        "IT Operations",
+        "Finance Operations"
+      ],
+      "createdAt": "2026-07-01T09:30:00.000Z",
+      "updatedAt": "2026-07-01T12:00:00.000Z",
+      "targetRelease": "2026-Q4 MVP",
+      "summary": {
+        "oneLiner": "Create one controlled workflow for onboarding employees and managing the first probation checkpoint.",
+        "description": "The PRD defines the HRM flow that starts at offer acceptance, coordinates onboarding tasks, and concludes with a structured probation review checkpoint.",
+        "whyNow": "The business is onboarding through shared documents and ad hoc checklists, which creates inconsistent employee setup quality.",
+        "expectedOutcome": "HR, managers, and IT can see who owns each onboarding step and whether the employee is ready to clear probation."
+      },
+      "problem": {
+        "statement": "Onboarding is distributed across messages, spreadsheets, and memory, which creates setup delays and weak probation readiness signals.",
+        "currentPain": "Managers do not know whether equipment, access, policy acknowledgment, and training milestones are complete.",
+        "businessImpact": "Time-to-productivity increases, compliance steps are missed, and probation decisions happen without evidence.",
+        "userImpact": "New employees receive uneven onboarding quality and experience uncertainty about expectations.",
+        "currentWorkarounds": "People ops keeps a manual tracker, while managers chase individual owners through chat.",
+        "opportunity": "A single onboarding record can later connect HR, IT, asset, learning, and manager review workflows."
+      },
+      "vision": {
+        "statement": "Every new employee should move through a visible onboarding plan with explicit readiness signals for probation review.",
+        "futureState": "People operations, hiring managers, and support teams collaborate around one employee setup record and one shared definition of readiness.",
+        "principles": [
+          "Separate ownership from visibility",
+          "Track evidence, not just status labels",
+          "Keep manager review grounded in completed milestones"
+        ]
+      },
+      "goals": [
+        {
+          "id": "goal-hrm-orchestrated-onboarding",
+          "title": "Orchestrate onboarding work in one place",
+          "description": "Create one onboarding record that shows owner, due state, and completion evidence for major setup steps.",
+          "type": "operational",
+          "priority": "high"
+        },
+        {
+          "id": "goal-hrm-probation-signal",
+          "title": "Create a probation readiness signal",
+          "description": "Managers should not enter probation review without visible completion of mandatory steps.",
+          "type": "business",
+          "priority": "high"
+        }
+      ],
+      "successMetrics": [
+        {
+          "id": "metric-hrm-day-one-readiness",
+          "metric": "Employees fully set up by day one",
+          "target": "90%+",
+          "measurementMethod": "Onboarding record completion audit",
+          "priority": "high"
+        },
+        {
+          "id": "metric-hrm-probation-evidence",
+          "metric": "Probation reviews backed by onboarding evidence",
+          "target": "100%",
+          "measurementMethod": "Manager review checklist audit",
+          "priority": "medium"
+        }
+      ],
+      "targetUsers": [
+        {
+          "id": "persona-hrm-peopleops",
+          "role": "People Operations Coordinator",
+          "description": "Owns onboarding setup and tracks completion across teams.",
+          "goals": [
+            "Start onboarding quickly",
+            "See blockers before start date"
+          ],
+          "painPoints": [
+            "Chasing multiple teams",
+            "Incomplete evidence"
+          ],
+          "mainActions": [
+            "Create onboarding plan",
+            "Review readiness",
+            "Escalate blockers"
+          ],
+          "permissionsNeeded": [
+            "Create records",
+            "View all tasks",
+            "Mark HR milestones complete"
+          ]
+        },
+        {
+          "id": "persona-hrm-manager",
+          "role": "Hiring Manager",
+          "description": "Reviews whether the employee is ready to clear probation and become fully productive.",
+          "goals": [
+            "See real readiness",
+            "Avoid manual follow-up"
+          ],
+          "painPoints": [
+            "No shared view of onboarding",
+            "Subjective probation reviews"
+          ],
+          "mainActions": [
+            "Review onboarding status",
+            "Approve probation outcome"
+          ],
+          "permissionsNeeded": [
+            "View assigned employee records",
+            "Comment on review checkpoints"
+          ]
+        }
+      ],
+      "scope": {
+        "inScope": [
+          "Onboarding record",
+          "Cross-functional onboarding checklist visibility",
+          "Mandatory evidence tracking",
+          "Probation checkpoint summary"
+        ],
+        "outOfScope": [
+          "Payroll processing",
+          "Leave management",
+          "Performance cycles"
+        ],
+        "mvpScope": [
+          "Employee onboarding record",
+          "Mandatory step visibility",
+          "Probation checkpoint readiness summary"
+        ],
+        "futureScope": [
+          "Automated reminders",
+          "Learning module integration",
+          "Manager scorecards"
+        ]
+      },
+      "capabilities": [
+        {
+          "id": "capability-hrm-onboarding-record",
+          "title": "Onboarding control record",
+          "description": "One record that consolidates setup steps, owners, statuses, and evidence.",
+          "outcome": "People ops can inspect onboarding without stitching external trackers.",
+          "priority": "high",
+          "relatedUsers": [
+            "persona-hrm-peopleops",
+            "persona-hrm-manager"
+          ],
+          "relatedRequirementIds": [
+            "req-hrm-record-exists",
+            "req-hrm-evidence-required"
+          ]
+        },
+        {
+          "id": "capability-hrm-probation-checkpoint",
+          "title": "Probation readiness checkpoint",
+          "description": "Present mandatory completion status before a probation review is logged.",
+          "outcome": "Managers can evaluate readiness from evidence instead of memory.",
+          "priority": "high",
+          "relatedUsers": [
+            "persona-hrm-manager"
+          ],
+          "relatedRequirementIds": [
+            "req-hrm-review-gating",
+            "req-hrm-manager-summary"
+          ]
+        }
+      ],
+      "highLevelUseCases": [
+        {
+          "id": "usecase-hrm-start-onboarding",
+          "title": "Start onboarding after offer acceptance",
+          "actor": "People Operations Coordinator",
+          "goal": "Initialize employee setup work from one record",
+          "preconditions": [
+            "Offer is accepted",
+            "Employee start date is known"
+          ],
+          "flow": [
+            "People ops creates the onboarding record",
+            "System creates the required milestone groups",
+            "Owners can view their steps by employee and start date"
+          ],
+          "outcome": "Employee onboarding is visible before day one.",
+          "relatedCapabilityIds": [
+            "capability-hrm-onboarding-record"
+          ],
+          "relatedRequirementIds": [
+            "req-hrm-record-exists",
+            "req-hrm-evidence-required"
+          ]
+        },
+        {
+          "id": "usecase-hrm-run-probation-review",
+          "title": "Run probation readiness review",
+          "actor": "Hiring Manager",
+          "goal": "See whether mandatory setup and early milestones were completed",
+          "preconditions": [
+            "Probation review date is due",
+            "Employee onboarding record exists"
+          ],
+          "flow": [
+            "Manager opens the employee record",
+            "System shows mandatory milestone completion and missing evidence",
+            "Manager records probation decision or requests follow-up"
+          ],
+          "outcome": "Probation review uses a visible evidence-backed summary.",
+          "relatedCapabilityIds": [
+            "capability-hrm-probation-checkpoint"
+          ],
+          "relatedRequirementIds": [
+            "req-hrm-review-gating",
+            "req-hrm-manager-summary"
+          ]
+        }
+      ],
+      "requirementModel": {
+        "businessRequirements": [
+          "req-hrm-review-gating"
+        ],
+        "userRequirements": [
+          "req-hrm-manager-summary"
+        ],
+        "functionalRequirements": [
+          "req-hrm-record-exists",
+          "req-hrm-evidence-required"
+        ],
+        "nonFunctionalRequirements": [],
+        "domainRequirements": [],
+        "dataRequirements": [],
+        "permissionRequirements": [],
+        "integrationRequirements": [],
+        "reportingRequirements": [],
+        "operationalRequirements": [],
+        "complianceRequirements": [],
+        "notes": "Seed grouping prepared for first review.",
+        "generatedAt": "2026-07-01T12:00:00.000Z"
+      },
+      "requirementItems": [
+        {
+          "id": "req-hrm-record-exists",
+          "type": "functional",
+          "title": "Employee onboarding record is mandatory",
+          "statement": "The workflow must create one onboarding record per new employee before start date work begins.",
+          "reason": "Without a canonical record, work remains scattered.",
+          "priority": "high",
+          "source": "People operations workshop",
+          "relatedCapabilityIds": [
+            "capability-hrm-onboarding-record"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-hrm-start-onboarding"
+          ],
+          "acceptanceHint": "System should create required onboarding sections automatically.",
+          "status": "draft"
+        },
+        {
+          "id": "req-hrm-evidence-required",
+          "type": "functional",
+          "title": "Mandatory steps require evidence",
+          "statement": "Critical onboarding items must capture evidence or explicit completion notes before they are marked complete.",
+          "reason": "Status-only onboarding hides whether real work happened.",
+          "priority": "high",
+          "source": "Audit concern from people operations",
+          "relatedCapabilityIds": [
+            "capability-hrm-onboarding-record"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-hrm-start-onboarding"
+          ],
+          "acceptanceHint": "Completion should not pass without evidence on mandatory steps.",
+          "status": "draft"
+        },
+        {
+          "id": "req-hrm-review-gating",
+          "type": "business",
+          "title": "Probation review cannot ignore missing mandatory work",
+          "statement": "The manager review view must show incomplete mandatory steps and missing evidence before a probation decision is finalized.",
+          "reason": "The company should not clear probation blindly.",
+          "priority": "high",
+          "source": "Manager review policy",
+          "relatedCapabilityIds": [
+            "capability-hrm-probation-checkpoint"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-hrm-run-probation-review"
+          ],
+          "acceptanceHint": "Manager decision flow should surface blocking gaps clearly.",
+          "status": "draft"
+        },
+        {
+          "id": "req-hrm-manager-summary",
+          "type": "user",
+          "title": "Managers need concise onboarding summary",
+          "statement": "Manager-facing review should summarize completed steps, blockers, and pending owner actions without forcing deep navigation.",
+          "reason": "Managers are not daily operators in onboarding detail views.",
+          "priority": "medium",
+          "source": "Manager interview notes",
+          "relatedCapabilityIds": [
+            "capability-hrm-probation-checkpoint"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-hrm-run-probation-review"
+          ],
+          "acceptanceHint": "Review page should surface summary first and drill-down second.",
+          "status": "draft"
+        }
+      ],
+      "domainRules": [
+        {
+          "id": "rule-hrm-mandatory-before-day-one",
+          "title": "Mandatory day-one steps",
+          "rule": "Access, policy acknowledgment, and manager intro steps are mandatory before an onboarding record can be marked day-one ready.",
+          "reason": "These items create minimum working readiness.",
+          "priority": "high",
+          "relatedRequirementIds": [
+            "req-hrm-evidence-required"
+          ]
+        }
+      ],
+      "dataContext": {
+        "coreEntities": [
+          {
+            "id": "entity-hrm-onboarding-record",
+            "name": "Employee Onboarding Record",
+            "description": "Primary record that tracks setup milestones and readiness state.",
+            "keyFields": [
+              "employeeId",
+              "startDate",
+              "owner",
+              "readinessState"
+            ],
+            "relationships": [
+              "Has many onboarding steps",
+              "Feeds probation review summary"
+            ]
+          },
+          {
+            "id": "entity-hrm-onboarding-step",
+            "name": "Onboarding Step",
+            "description": "One owned milestone inside an onboarding record.",
+            "keyFields": [
+              "stepId",
+              "recordId",
+              "owner",
+              "status",
+              "evidence"
+            ],
+            "relationships": [
+              "Belongs to Employee Onboarding Record"
+            ]
+          }
+        ],
+        "dataOwnership": "People operations owns workflow policy. Step owners own evidence quality.",
+        "dataRetentionNotes": "Onboarding evidence should stay available through probation and basic audit review windows.",
+        "auditNeeds": "Mandatory step completion and probation decisions must remain reviewable."
+      },
+      "uxPrinciples": [
+        "Show readiness as evidence-backed, not color-only",
+        "Keep manager summary concise and action-oriented"
+      ],
+      "constraints": [
+        {
+          "id": "constraint-hrm-shared-owner",
+          "type": "operational",
+          "description": "Multiple teams contribute to onboarding, so visibility must span HR, IT, and managers.",
+          "impact": "Narrow ownership views would recreate shadow trackers.",
+          "priority": "high"
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "dependency-hrm-membership",
+          "title": "Workspace member identity",
+          "type": "internal",
+          "description": "Owner assignment depends on stable member records.",
+          "owner": "Platform Core",
+          "riskIfMissing": "Cross-team onboarding ownership becomes ambiguous."
+        }
+      ],
+      "risks": [
+        {
+          "id": "risk-hrm-fake-completion",
+          "title": "Teams mark steps complete without evidence",
+          "description": "If evidence is optional in practice, the manager summary becomes untrustworthy.",
+          "impact": "high",
+          "likelihood": "medium",
+          "mitigation": "Make evidence required for critical milestones and expose gaps in review UI.",
+          "owner": "HR Product Manager"
+        }
+      ],
+      "releaseExpectation": {
+        "mvp": "Onboarding record, mandatory steps, evidence, and manager review summary.",
+        "alpha": "Role-based views and blocker reporting.",
+        "beta": "Automation reminders and deeper milestone templates.",
+        "future": "Learning, asset, and equipment workflow integration.",
+        "releaseNotes": "This PRD creates the first HRM execution record that can later branch into richer lifecycle flows."
+      },
+      "openQuestions": [
+        {
+          "id": "question-hrm-probation-template",
+          "question": "Should probation summary be standardized across all roles or configurable by department?",
+          "context": "Configurable reviews add flexibility but increase model complexity early.",
+          "owner": "HR Product Manager",
+          "status": "open",
+          "decisionNeededBy": "Before solution design freeze"
+        }
+      ],
+      "approval": {
+        "productOwner": {
+          "reviewer": "Chief Product Officer",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        },
+        "domainOwner": {
+          "reviewer": "People Operations Lead",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        },
+        "engineeringLead": {
+          "reviewer": "Platform Engineering Lead",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        },
+        "designLead": {
+          "reviewer": "Design Lead",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        },
+        "qaLead": {
+          "reviewer": "QA Lead",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        }
+      },
+      "changeLog": [
+        {
+          "version": "v0.3",
+          "date": "2026-07-01",
+          "author": "HR Product Manager",
+          "change": "Converted onboarding discovery into structured PRD sections and added probation gating."
+        }
+      ]
+    },
+    {
+      "id": "prd-erp-inventory-cycle-count-control",
+      "title": "ERP Inventory Cycle Count Control",
+      "status": "draft",
+      "version": "v0.2",
+      "productId": "product-business-operating-system",
+      "module": "ERP / Inventory",
+      "owner": "Inventory Product Manager",
+      "authors": [
+        "Inventory Product Manager",
+        "Operations Analyst"
+      ],
+      "reviewers": [
+        "Warehouse Lead",
+        "Engineering Lead"
+      ],
+      "stakeholders": [
+        "Finance Controller",
+        "Inventory Control Lead",
+        "Warehouse Supervisors"
+      ],
+      "createdAt": "2026-07-01T10:00:00.000Z",
+      "updatedAt": "2026-07-01T12:00:00.000Z",
+      "targetRelease": "2026-Q4 MVP",
+      "summary": {
+        "oneLiner": "Define the inventory cycle count flow that identifies stock variances and controls how adjustments are approved.",
+        "description": "This PRD covers scheduled cycle counts, variance review, and approval-gated stock adjustments so inventory accuracy work becomes auditable.",
+        "whyNow": "Inventory accuracy is still managed manually, and correction decisions do not have a reliable system trail.",
+        "expectedOutcome": "Warehouse and finance teams can trust that count variances are visible, reviewed, and approved before stock changes post."
+      },
+      "problem": {
+        "statement": "Count variance handling is not consistently controlled, which weakens confidence in stock accuracy and auditability.",
+        "currentPain": "Supervisors record counts in sheets, adjustments happen later, and finance cannot always trace who approved the correction.",
+        "businessImpact": "Stock discrepancies distort replenishment, fulfillment confidence, and audit posture.",
+        "userImpact": "Inventory control teams spend time explaining corrections instead of preventing them.",
+        "currentWorkarounds": "Teams export stock data, count offline, and request approvals through chat or email.",
+        "opportunity": "A structured count and adjustment flow becomes a reusable control layer for broader inventory operations."
+      },
+      "vision": {
+        "statement": "Inventory counts should move through one visible control path from schedule to reviewed correction.",
+        "futureState": "Warehouse teams can execute counts quickly, while finance and inventory control can trust the audit trail behind every variance resolution.",
+        "principles": [
+          "Keep physical count work fast",
+          "Do not hide variance review behind spreadsheets",
+          "Require explicit approval for material corrections"
+        ]
+      },
+      "goals": [
+        {
+          "id": "goal-inventory-count-structure",
+          "title": "Structure cycle count execution",
+          "description": "Move count entry and variance visibility into the product.",
+          "type": "operational",
+          "priority": "high"
+        },
+        {
+          "id": "goal-inventory-adjustment-control",
+          "title": "Control inventory adjustments",
+          "description": "Require reason and approval before material stock corrections are posted.",
+          "type": "business",
+          "priority": "high"
+        }
+      ],
+      "successMetrics": [
+        {
+          "id": "metric-inventory-variance-review",
+          "metric": "Variances reviewed before adjustment posting",
+          "target": "100%",
+          "measurementMethod": "Count-to-adjustment audit trail",
+          "priority": "high"
+        },
+        {
+          "id": "metric-inventory-traceability",
+          "metric": "Adjustment records with complete audit fields",
+          "target": "100%",
+          "measurementMethod": "Monthly finance spot check",
+          "priority": "high"
+        }
+      ],
+      "targetUsers": [
+        {
+          "id": "persona-inventory-controller",
+          "role": "Inventory Control Supervisor",
+          "description": "Coordinates count schedules, reviews variances, and submits correction requests.",
+          "goals": [
+            "Run counts consistently",
+            "Resolve variances with evidence"
+          ],
+          "painPoints": [
+            "Offline count tracking",
+            "Weak correction traceability"
+          ],
+          "mainActions": [
+            "Create count batch",
+            "Review variances",
+            "Submit adjustments"
+          ],
+          "permissionsNeeded": [
+            "Manage counts",
+            "View all variances",
+            "Submit adjustments"
+          ]
+        },
+        {
+          "id": "persona-inventory-finance",
+          "role": "Finance Controller",
+          "description": "Reviews adjustment significance and expects reliable approval evidence.",
+          "goals": [
+            "Trust the audit trail",
+            "Review only material corrections"
+          ],
+          "painPoints": [
+            "Corrections appear without context",
+            "Hard to trace approval path"
+          ],
+          "mainActions": [
+            "Approve adjustments",
+            "Audit posted corrections"
+          ],
+          "permissionsNeeded": [
+            "View approvals",
+            "Approve or reject material adjustments"
+          ]
+        }
+      ],
+      "scope": {
+        "inScope": [
+          "Cycle count batch creation",
+          "Count entry against expected stock",
+          "Variance review state",
+          "Adjustment request and approval"
+        ],
+        "outOfScope": [
+          "Inventory valuation redesign",
+          "Advanced warehouse optimization"
+        ],
+        "mvpScope": [
+          "Count batch",
+          "Variance review",
+          "Approval-gated adjustment posting"
+        ],
+        "futureScope": [
+          "RF device workflow",
+          "Automated recount routing"
+        ]
+      },
+      "capabilities": [
+        {
+          "id": "capability-inventory-count-batch",
+          "title": "Count batch execution",
+          "description": "Run a controlled count batch and expose variance lines immediately.",
+          "outcome": "Count work stays operational while variance review becomes visible.",
+          "priority": "high",
+          "relatedUsers": [
+            "persona-inventory-controller"
+          ],
+          "relatedRequirementIds": [
+            "req-inventory-count-batch",
+            "req-inventory-variance-visible"
+          ]
+        },
+        {
+          "id": "capability-inventory-adjustment-approval",
+          "title": "Adjustment approval control",
+          "description": "Require approval and reason tracking before material corrections post to stock.",
+          "outcome": "Posted adjustments carry clear business evidence.",
+          "priority": "high",
+          "relatedUsers": [
+            "persona-inventory-controller",
+            "persona-inventory-finance"
+          ],
+          "relatedRequirementIds": [
+            "req-inventory-adjustment-reason",
+            "req-inventory-approval-gating"
+          ]
+        }
+      ],
+      "highLevelUseCases": [
+        {
+          "id": "usecase-inventory-run-count",
+          "title": "Run cycle count and identify variances",
+          "actor": "Inventory Control Supervisor",
+          "goal": "Create a count batch and capture differences from expected stock",
+          "preconditions": [
+            "Items and locations already exist in inventory"
+          ],
+          "flow": [
+            "Supervisor creates a count batch",
+            "Counters enter counted values for each line",
+            "System highlights lines where counted and expected values differ"
+          ],
+          "outcome": "Variance lines are available for review before any correction occurs.",
+          "relatedCapabilityIds": [
+            "capability-inventory-count-batch"
+          ],
+          "relatedRequirementIds": [
+            "req-inventory-count-batch",
+            "req-inventory-variance-visible"
+          ]
+        },
+        {
+          "id": "usecase-inventory-approve-adjustment",
+          "title": "Approve material adjustment",
+          "actor": "Finance Controller",
+          "goal": "Review a requested correction before it changes stock",
+          "preconditions": [
+            "Variance already exists",
+            "Adjustment request has been submitted"
+          ],
+          "flow": [
+            "Finance opens the adjustment request",
+            "Finance reviews reason, counted value, and proposed correction",
+            "Finance approves or rejects the adjustment"
+          ],
+          "outcome": "Only approved material corrections post to inventory.",
+          "relatedCapabilityIds": [
+            "capability-inventory-adjustment-approval"
+          ],
+          "relatedRequirementIds": [
+            "req-inventory-adjustment-reason",
+            "req-inventory-approval-gating"
+          ]
+        }
+      ],
+      "requirementModel": {
+        "businessRequirements": [
+          "req-inventory-approval-gating"
+        ],
+        "userRequirements": [],
+        "functionalRequirements": [
+          "req-inventory-count-batch",
+          "req-inventory-variance-visible",
+          "req-inventory-adjustment-reason"
+        ],
+        "nonFunctionalRequirements": [
+          "req-inventory-audit-fields"
+        ],
+        "domainRequirements": [],
+        "dataRequirements": [],
+        "permissionRequirements": [],
+        "integrationRequirements": [],
+        "reportingRequirements": [],
+        "operationalRequirements": [],
+        "complianceRequirements": [],
+        "notes": "Seed grouping for cycle count control.",
+        "generatedAt": "2026-07-01T12:00:00.000Z"
+      },
+      "requirementItems": [
+        {
+          "id": "req-inventory-count-batch",
+          "type": "functional",
+          "title": "Cycle counts run in structured batches",
+          "statement": "Users must create a count batch that groups the lines to be counted together.",
+          "reason": "Count work needs an execution container and review boundary.",
+          "priority": "high",
+          "source": "Inventory control workshop",
+          "relatedCapabilityIds": [
+            "capability-inventory-count-batch"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-inventory-run-count"
+          ],
+          "acceptanceHint": "Count batch must remain visible until every line is resolved.",
+          "status": "draft"
+        },
+        {
+          "id": "req-inventory-variance-visible",
+          "type": "functional",
+          "title": "Variances stay visible before correction",
+          "statement": "Any mismatch between expected and counted stock must remain visible until reviewed.",
+          "reason": "Hidden variances create weak controls and rushed adjustments.",
+          "priority": "high",
+          "source": "Operations audit issue",
+          "relatedCapabilityIds": [
+            "capability-inventory-count-batch"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-inventory-run-count"
+          ],
+          "acceptanceHint": "Variance lines should display expected, counted, and difference values.",
+          "status": "draft"
+        },
+        {
+          "id": "req-inventory-adjustment-reason",
+          "type": "functional",
+          "title": "Adjustment requests require reason",
+          "statement": "A correction request must capture the variance reason before it can be submitted.",
+          "reason": "Reasonless adjustments are not auditable.",
+          "priority": "high",
+          "source": "Finance control requirement",
+          "relatedCapabilityIds": [
+            "capability-inventory-adjustment-approval"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-inventory-approve-adjustment"
+          ],
+          "acceptanceHint": "Submission should fail when no reason is provided.",
+          "status": "draft"
+        },
+        {
+          "id": "req-inventory-approval-gating",
+          "type": "business",
+          "title": "Material corrections require approval",
+          "statement": "Corrections above the configured threshold must not post until approved.",
+          "reason": "Material stock changes should not bypass review.",
+          "priority": "high",
+          "source": "Finance policy",
+          "relatedCapabilityIds": [
+            "capability-inventory-adjustment-approval"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-inventory-approve-adjustment"
+          ],
+          "acceptanceHint": "Approval state should block posting until complete.",
+          "status": "draft"
+        },
+        {
+          "id": "req-inventory-audit-fields",
+          "type": "non_functional",
+          "title": "Posted adjustments preserve audit metadata",
+          "statement": "Posted corrections must preserve approver, timestamp, originating count line, and reason.",
+          "reason": "Audit and reconciliation require a durable trace.",
+          "priority": "high",
+          "source": "Controller audit need",
+          "relatedCapabilityIds": [
+            "capability-inventory-adjustment-approval"
+          ],
+          "relatedUseCaseIds": [
+            "usecase-inventory-approve-adjustment"
+          ],
+          "acceptanceHint": "Audit metadata must be queryable after posting.",
+          "status": "draft"
+        }
+      ],
+      "domainRules": [
+        {
+          "id": "rule-inventory-no-direct-post",
+          "title": "No direct material posting",
+          "rule": "A material variance cannot post directly from count entry without review.",
+          "reason": "Separates physical counting from financial impact decisions.",
+          "priority": "high",
+          "relatedRequirementIds": [
+            "req-inventory-approval-gating"
+          ]
+        }
+      ],
+      "dataContext": {
+        "coreEntities": [
+          {
+            "id": "entity-inventory-count-batch",
+            "name": "Cycle Count Batch",
+            "description": "Execution container for one scheduled count event.",
+            "keyFields": [
+              "batchId",
+              "locationId",
+              "status",
+              "createdBy"
+            ],
+            "relationships": [
+              "Has many count lines",
+              "Can produce adjustment requests"
+            ]
+          },
+          {
+            "id": "entity-inventory-adjustment-request",
+            "name": "Adjustment Request",
+            "description": "Proposed stock correction created from a variance line.",
+            "keyFields": [
+              "requestId",
+              "varianceLineId",
+              "reason",
+              "approvalState"
+            ],
+            "relationships": [
+              "Belongs to count line",
+              "Can post stock adjustment"
+            ]
+          }
+        ],
+        "dataOwnership": "Inventory control owns count execution. Finance owns approval thresholds.",
+        "dataRetentionNotes": "Adjustment evidence and approval metadata should align to stock audit retention policy.",
+        "auditNeeds": "Material correction trail must remain visible from count batch through posted stock update."
+      },
+      "uxPrinciples": [
+        "Keep count entry fast and line-based",
+        "Show variance state before any corrective action",
+        "Treat approval as a visible state, not hidden metadata"
+      ],
+      "constraints": [
+        {
+          "id": "constraint-inventory-count-speed",
+          "type": "operational",
+          "description": "Count entry must remain practical on the warehouse floor.",
+          "impact": "Slow or complex flows will push teams back to offline counting.",
+          "priority": "high"
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "dependency-inventory-stock-ledger",
+          "title": "Stock ledger integrity",
+          "type": "internal",
+          "description": "Count expectations and posted corrections rely on a trustworthy ledger.",
+          "owner": "Inventory Platform",
+          "riskIfMissing": "Count variance results become unreliable."
+        }
+      ],
+      "risks": [
+        {
+          "id": "risk-inventory-thresholds",
+          "title": "Approval thresholds are defined too loosely",
+          "description": "If materiality rules are weak, significant corrections could still move too quickly.",
+          "impact": "high",
+          "likelihood": "medium",
+          "mitigation": "Agree threshold policy with finance before beta.",
+          "owner": "Inventory Product Manager"
+        }
+      ],
+      "releaseExpectation": {
+        "mvp": "Cycle count batches, variance review, and approval-gated correction posting.",
+        "alpha": "Supervisor dashboards and variance aging views.",
+        "beta": "Role tuning and higher-volume warehouse validation.",
+        "future": "RF-assisted count execution and automated recount suggestions.",
+        "releaseNotes": "This PRD creates the first meaningful inventory control workflow for ERP inside BOS."
+      },
+      "openQuestions": [
+        {
+          "id": "question-inventory-materiality",
+          "question": "Should materiality thresholds vary by item class or only by absolute value?",
+          "context": "Threshold logic affects approval behavior and reporting complexity.",
+          "owner": "Finance Controller",
+          "status": "open",
+          "decisionNeededBy": "Before finance sign-off"
+        }
+      ],
+      "approval": {
+        "productOwner": {
+          "reviewer": "Chief Product Officer",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        },
+        "domainOwner": {
+          "reviewer": "Inventory Control Lead",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        },
+        "engineeringLead": {
+          "reviewer": "Platform Engineering Lead",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        },
+        "designLead": {
+          "reviewer": "Design Lead",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        },
+        "qaLead": {
+          "reviewer": "QA Lead",
+          "state": "pending",
+          "notes": "",
+          "updatedAt": ""
+        }
+      },
+      "changeLog": [
+        {
+          "version": "v0.2",
+          "date": "2026-07-01",
+          "author": "Inventory Product Manager",
+          "change": "Defined first structured PRD for cycle count and adjustment control."
+        }
+      ]
+    }
+  ]
+}

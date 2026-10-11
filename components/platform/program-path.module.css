@@ -1,0 +1,69 @@
+/* the programs as one path — a line of dots, a card under each */
+.root { --ink: #0d1117; --muted: rgba(13,17,23,.6); --line: rgba(13,17,23,.12); --cardBg: #fff; --cardBd: rgba(13,17,23,.08); display: grid; gap: 12px; }
+.path {
+  position: relative; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 16px; list-style: none; margin: 0; padding: 22px 0 0; }
+.dark { --ink: #fff; --muted: rgba(255,255,255,.62); --line: rgba(255,255,255,.16); --cardBg: rgba(255,255,255,.04); --cardBd: rgba(255,255,255,.1); }
+.path::before { content: ""; position: absolute; top: 29px; left: 8%; right: 8%; height: 2px; background: linear-gradient(90deg, #4fd1c5, #e91e63, #a78bfa, #f4a261, #6d48d8); opacity: .55; }
+
+.step { position: relative; display: grid; gap: 12px; justify-items: center; }
+.dot { position: relative; z-index: 1; width: 16px; height: 16px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 22%, transparent); }
+.stepLive .dot { width: 20px; height: 20px; margin-top: -2px; box-shadow: 0 0 0 7px color-mix(in srgb, var(--c) 25%, transparent), 0 0 24px var(--c); }
+
+.card { display: grid; align-content: start; gap: 7px; width: 100%; height: 100%; padding: 18px 18px; border-radius: 22px; background: var(--cardBg); border: 1px solid var(--cardBd); color: var(--ink); text-decoration: none;
+  transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .3s; }
+.card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--c) 55%, transparent); }
+.stepLive .card { border: 2px solid var(--c); box-shadow: 0 24px 50px -28px color-mix(in srgb, var(--c) 80%, transparent); }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px; background: color-mix(in srgb, var(--c) 16%, transparent); color: var(--c); }
+.icon > span { font-size: 22px; }
+.len { font: 800 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--c); padding: 6px 9px; border-radius: 999px; background: color-mix(in srgb, var(--c) 12%, transparent); }
+.name { font: 900 17px/1.15 var(--head, inherit); text-transform: uppercase; letter-spacing: -.02em; color: var(--ink); }
+.who { font-size: 12px; font-weight: 700; color: var(--muted); }
+.tag { font-size: 13.5px; line-height: 1.55; color: var(--muted); }
+.out { display: flex; gap: 6px; align-items: flex-start; font-size: 13px; font-weight: 700; line-height: 1.45; color: var(--ink); }
+.ms { font-size: 16px; color: var(--c); }
+.live, .soon { margin-top: auto; padding-top: 6px; display: inline-flex; align-items: center; gap: 4px; font: 800 11.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
+.live { color: var(--c); }
+.soon { color: var(--muted); }
+
+/* in the making — a slow pulse */
+.building { margin-top: auto; padding-top: 6px; display: inline-flex; align-items: center; gap: 7px; font: 800 11.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--c); }
+.pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--c); animation: pulse 1.8s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--c) 55%, transparent); } 50% { box-shadow: 0 0 0 6px transparent; } }
+@media (prefers-reduced-motion: reduce) { .pulse { animation: none; } }
+
+/* short laptop screens: keep the section on one screen — drop the secondary lines */
+@media (min-width: 1101px) and (max-height: 860px) {
+  .out, .more:not(.day) .ideas { display: none; }
+  .tag { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+}
+
+/* a day at NODE (masterclasses) and more to come, side by side */
+.extras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 900px) { .extras { grid-template-columns: 1fr; } }
+.day { border-style: solid; border-color: color-mix(in srgb, var(--c) 40%, transparent); background: color-mix(in srgb, var(--c) 6%, transparent); }
+.dayIcon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 11px; background: color-mix(in srgb, var(--c) 22%, transparent); color: color-mix(in srgb, var(--c) 70%, #5a4000); }
+.dark .dayIcon { color: var(--c); }
+.dayIcon > span { font-size: 19px; }
+.moreText em { font-style: normal; font: 800 10.5px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; color: color-mix(in srgb, var(--c, #888) 70%, #5a4000); margin-right: 6px; }
+.dark .moreText em { color: var(--c); }
+.plus { border: 0 !important; padding-left: 2px !important; }
+
+/* more to come */
+.more { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 12px 14px 12px 12px; border-radius: 18px; border: 1.5px dashed var(--line); color: var(--ink); }
+.moreIcon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 11px; background: linear-gradient(135deg, #4fd1c5, #e91e63, #6d48d8); color: #fff; }
+.moreIcon > span { font-size: 18px; }
+.moreText { flex: 1 1 260px; font-size: 13.5px; line-height: 1.45; color: var(--muted); }
+.moreText b { color: var(--ink); font-weight: 900; text-transform: uppercase; letter-spacing: -.01em; margin-right: 4px; }
+.ideas { display: flex; flex-wrap: wrap; gap: 6px; }
+.ideas span { padding: 5px 10px; border-radius: 999px; border: 1px solid var(--cardBd); font-size: 12px; font-weight: 700; color: var(--muted); }
+.moreCta { display: inline-flex; align-items: center; gap: 4px; padding: 9px 14px; border-radius: 999px; background: var(--ink); color: var(--cardBg); font-size: 12px; font-weight: 800; line-height: 1; text-decoration: none; text-transform: uppercase; letter-spacing: .06em; }
+.dark .moreCta { color: #0d1117; }
+.moreCta .ms { color: inherit; }
+
+@media (max-width: 1100px) {
+  .path { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: 0; }
+  .path::before, .dot { display: none; }
+}
+@media (max-width: 560px) { .path { grid-template-columns: 1fr; } }

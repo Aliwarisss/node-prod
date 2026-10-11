@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "roadmap-static",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4791", "--directory", "the-book"],
+      "port": 4791
+    },
+    {
+      "name": "next-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "env": { "NEXTAUTH_URL": "http://localhost:3001" },
+      "port": 3001,
+      "autoPort": true
+    }
+  ]
+}
