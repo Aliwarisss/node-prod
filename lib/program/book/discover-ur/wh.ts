@@ -1,0 +1,65 @@
+import type { ChapterQuestions } from "../types";
+
+/* Roman Urdu: the questions each chapter answers, tied to the section that answers them (same ids as English). */
+export const discoverQuestionsUr: ChapterQuestions = {
+  opening: [
+    { q: "Discover kis liye hai, aur is se kya banta hai?", at: "what" },
+    { q: "Discover kisi design ya build se pehle kyun aata hai?", at: "what" },
+    { q: "Yeh act kab khatam hota hai, aur kis faisle par?", at: "what" },
+    { q: "Northwind kaun hai, aur woh kya maang rahe hain?", at: "case" },
+    { q: "Yeh book lessons ke saath kaise parhni chahiye?", at: "read" },
+  ],
+  "day-1": [
+    { q: "Client asal mein kya maang raha hai, ek line mein?", at: "discover.context.brief" },
+    { q: "Brief ko capabilities, inputs aur outputs mein kaise todte hain?", at: "discover.context.brief" },
+    { q: "Maujooda system asal mein kahan se shuru aur kahan khatam hota hai?", at: "discover.context.system" },
+    { q: "Code health ko raaye ke baghair kaise parakhte hain?", at: "discover.context.system" },
+    { q: "Data kahan banta, copy hota aur dobara type hota hai?", at: "discover.context.integrations" },
+    { q: "Test call documentation se zyada qeemti kyun hai?", at: "discover.context.integrations" },
+    { q: "Constraint aur assumption mein kya farq hai?", at: "discover.context.constraints" },
+    { q: "Hard constraints kaun confirm karta hai, aur kaise?", at: "discover.context.constraints" },
+  ],
+  "day-2": [
+    { q: "Problem ko proposed solution se alag karna kyun zaroori hai?", at: "discover.frame.separate" },
+    { q: "Solution se neeche asal condition tak kaise pohanchte hain?", at: "discover.frame.separate" },
+    { q: "Kaunsi hypothesis ghalat sabit ki ja sakti hai?", at: "discover.frame.unknowns" },
+    { q: "Unknowns ko kaise rank karein ke sab se khatarnak pehle test ho?", at: "discover.frame.unknowns" },
+    { q: "“Fast” ya “reliable” ko target kaise banate hain?", at: "discover.frame.quality" },
+    { q: "Targets kaun agree karta hai — tech lead ya client?", at: "discover.frame.quality" },
+    { q: "Spike kab sahi test hai, aur kab nahi?", at: "discover.frame.spikes" },
+    { q: "Spike kitni der chale, aur kaunsa data use kar sakti hai?", at: "discover.frame.spikes" },
+  ],
+  "day-3": [
+    { q: "Aaj ka flow kahan reproduce karein — aur kahan kabhi nahi?", at: "discover.problem.reproduce" },
+    { q: "Achha trace har step par kya record karta hai?", at: "discover.problem.reproduce" },
+    { q: "Kuch badalne se pehle baseline kyun naapte hain?", at: "discover.problem.baseline" },
+    { q: "Averages ke bajaye median aur p95 kyun report karte hain?", at: "discover.problem.baseline" },
+    { q: "Kisi insaan ko blame kiye baghair root cause kaise dhoondte hain?", at: "discover.problem.causes" },
+    { q: "Kaunse causes rakhte hain, aur unhein kaise rank karte hain?", at: "discover.problem.causes" },
+    { q: "Technical problem statement ke paanch hisse kya hain?", at: "discover.problem.statement" },
+    { q: "Statement mein koi technology ka naam kyun nahi hona chahiye?", at: "discover.problem.statement" },
+  ],
+  "day-4": [
+    { q: "Option scan mein kaunse routes hone chahiye — “kuch na karna” samet?", at: "discover.validate.scan" },
+    { q: "Hard constraints sab se pehle kyun check karte hain?", at: "discover.validate.scan" },
+    { q: "Scoring weights kab fix hone chahiye, aur kyun?", at: "discover.validate.evaluate" },
+    { q: "Option ko shohrat ke bajaye saboot par kaise score karte hain?", at: "discover.validate.evaluate" },
+    { q: "Prototype kis unknown ka haq hai?", at: "discover.validate.prototype" },
+    { q: "Baad mein prototype code ka kya hota hai?", at: "discover.validate.prototype" },
+    { q: "Options ko kaise sketch karein ke unka munsifana muqabla ho sake?", at: "discover.validate.architecture" },
+  ],
+  "day-5": [
+    { q: "Feasibility kaise rate karte hain, aur har rating ke peeche kya hota hai?", at: "discover.decide.feasibility" },
+    { q: "Unknown ko kabhi low risk kyun nahi kehte?", at: "discover.decide.feasibility" },
+    { q: "Estimate low / likely / high mein kyun, ek number mein kyun nahi?", at: "discover.decide.estimate" },
+    { q: "Tech lead ki had se bade risks kis ko bataye jaate hain?", at: "discover.decide.estimate" },
+    { q: "Har option kya chhorta hai, aur yeh kaise kehte hain?", at: "discover.decide.compare" },
+    { q: "Barabar ke muqable mein kaunsa option jeet-ta hai?", at: "discover.decide.compare" },
+    { q: "ADR mein kya jaata hai, aur use kaun accept karta hai?", at: "discover.decide.record" },
+    { q: "Discover khatam hone par PLAN ko kya milta hai?", at: "discover.decide.record" },
+  ],
+  closing: [
+    { q: "PLAN ko asal mein kya hand over karte hain?", at: "handoff" },
+    { q: "Kaise pata chale ke Discover sach mein mukammal ho gaya?", at: "handoff" },
+  ],
+};

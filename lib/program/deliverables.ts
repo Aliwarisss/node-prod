@@ -31,6 +31,8 @@ export function linksOf(lesson: Lesson, d: Deliverable, all: Deliverable[]): Tas
 }
 
 export function deliverablesOf(lesson: Lesson): Deliverable[] {
+  /* Day 0 is orientation: its lessons are read, done and ticked off — nothing goes to a reviewer */
+  if (lesson.fid.startsWith("kickoff.")) return [];
   const ex = ((lesson.contract ?? {}).execution ?? {}) as Record<string, unknown>;
   const roles = Array.isArray(ex.roles) ? (ex.roles as string[]) : [];
   const accountable = roles.find((r) => /^A\s*[—-]/.test(r));

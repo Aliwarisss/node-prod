@@ -21,7 +21,7 @@ import type { ChecklistSummary } from "./dashboard-types";
 const OnboardingFlow = dynamic(() => import("./onboarding-flow"), { ssr: false });
 const FirstRun = dynamic(() => import("./first-run"), { ssr: false });
 
-export type DashboardSection = "overview" | "projects" | "roadmap" | "profile" | "trainees" | "reviews" | "workspace" | "progress" | "kit" | "leaderboard" | "board" | "sessions" | "feed" | "referrals" | "certificates" | "onboarding" | "admin" | "explorer" | "calendar" | "pricing";
+export type DashboardSection = "overview" | "projects" | "roadmap" | "profile" | "trainees" | "reviews" | "workspace" | "progress" | "kit" | "leaderboard" | "board" | "sessions" | "feed" | "referrals" | "certificates" | "onboarding" | "admin" | "explorer" | "calendar" | "pricing" | "book" | "vlog";
 
 type DashboardChromeProps = {
   activeSection: DashboardSection;
@@ -56,6 +56,8 @@ const TITLES: Record<DashboardSection, { title: string; crumb: string }> = {
   explorer: { title: "Explorer", crumb: "Your roadmap" },
   calendar: { title: "Calendar", crumb: "Live sessions" },
   pricing: { title: "Pricing", crumb: "Admin" },
+  book: { title: "The book", crumb: "Learn" },
+  vlog: { title: "The vlog", crumb: "Learn" },
 };
 
 /* The dashboard's frame for trainees and admins: Node's dark sidebar, a quiet top bar, room for the page */
@@ -63,7 +65,8 @@ export function DashboardChrome({ activeSection, actions, checklist, children, p
   const [open, setOpen] = useState(false);
   /* on a day of the program the sidebar folds to an icon rail (wide screens), to give the lesson the room; it can be expanded again */
   const pathname = usePathname();
-  const isDay = pathname.startsWith("/dashboard/roadmap/day/");
+  /* a day's lessons and the book want the width: the sidebar folds to its icon rail there (it can be opened again) */
+  const isDay = pathname.startsWith("/dashboard/roadmap/day/") || pathname.startsWith("/dashboard/book/") || pathname.startsWith("/dashboard/vlog/");
   const [pref, setPref] = useState<{ path: string; rail: boolean } | null>(null);
   const rail = pref?.path === pathname ? pref.rail : isDay;
   const setRail = (v: boolean) => setPref({ path: pathname, rail: v });
@@ -155,6 +158,8 @@ export function DashboardChrome({ activeSection, actions, checklist, children, p
     { section: "feed", label: "Feed", icon: "dynamic_feed", href: "/dashboard/feed" },
     { section: "roadmap", label: "My program", icon: "menu_book", href: "/dashboard/roadmap" },
     { section: "calendar", label: "Calendar", icon: "calendar_month", href: "/dashboard/calendar" },
+    { section: "book", label: "The book", icon: "menu_book", href: "/dashboard/book/discover" },
+    { section: "vlog", label: "The vlog", icon: "smart_display", href: "/dashboard/vlog/discover" },
     { section: "kit", label: "Agent kit", icon: "smart_toy", href: "/dashboard/kit" },
     { section: "board", label: "Board", icon: "forum", href: "/dashboard/board" },
     { section: "leaderboard", label: "Leaderboard", icon: "leaderboard", href: "/dashboard/leaderboard" },

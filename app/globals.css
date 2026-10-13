@@ -340,7 +340,14 @@ body { padding-top: var(--nb, 0px); }
 .wt-bars { animation: wt-bars .9s cubic-bezier(.2, .8, .3, 1) both; }
 .wt-bars:first-of-type { transform-origin: top; }
 .wt-glow { animation: wt-glow 2s ease-in-out infinite; }
-/* the referral scene's counter: each value shows for its moment and gives way to the next; the last one stays */
-@keyframes wt-tick { 0% { opacity: 0; transform: translateY(14px); } 8%, 92% { opacity: 1; transform: none; } 100% { opacity: calc(var(--last, 0)); transform: translateY(calc(-14px * (1 - var(--last, 0)))); } }
-.wt-tick { opacity: 0; animation: wt-tick .6s cubic-bezier(.2, .8, .3, 1) both; }
-@media (prefers-reduced-motion: reduce) { .wt-cold, .wt-mark, .wt-sweep, .wt-wipe, .wt-edge, .wt-push, .wt-word, .wt-bars, .wt-glow, .wt-tick { animation: none; } .wt-edge { display: none; } .wt-tick { opacity: 0; } .wt-tick:last-child { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .wt-cold, .wt-mark, .wt-sweep, .wt-wipe, .wt-edge, .wt-push, .wt-word, .wt-bars, .wt-glow { animation: none; } .wt-edge { display: none; } }
+
+/* the book: a reader's highlights (painted with the CSS Custom Highlight API, so the text itself is never rewrapped) */
+::highlight(bk-yellow) { background-color: #fde68a; }
+::highlight(bk-green) { background-color: #bbf7d0; }
+::highlight(bk-blue) { background-color: #bfdbfe; }
+::highlight(bk-pink) { background-color: #fbcfe8; }
+
+/* the book: a piece arriving (a ladder rung, a revealed step) */
+@keyframes bk-in { from { opacity: 0; transform: translateY(-6px); } }
+.bk-in { animation: bk-in 0.45s ease-out both; }

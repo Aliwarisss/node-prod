@@ -576,7 +576,9 @@ export function DoPanel({ lesson: l, day, state, project, subs, docs, kit = null
       {kit && l.fid.startsWith("kickoff.") ? <KitStrip kit={kit} lesson={l} /> : null}
 
         <div className="min-w-0">
-          {cur >= 0 ? (
+          {l.fid.startsWith("kickoff.") ? (
+            <KickoffDo lesson={l} day={day} state={state} needsProject={picking && !project} onDone={onDone} />
+          ) : cur >= 0 ? (
             <TaskView key={`${l.fid}|${deliverables[cur].key}`} d={deliverables[cur]} idx={cur} total={deliverables.length} all={deliverables} sub={subOf(deliverables[cur])} docs={docs} lesson={l} day={day} project={project} kit={kit} onSaved={onSub} onDoc={onDoc} onGo={(k) => setTab(k)} crumbs={crumbs} />
           ) : (
             <div className="grid gap-4">
@@ -629,5 +631,61 @@ export function DoPanel({ lesson: l, day, state, project, subs, docs, kit = null
           )}
         </div>
     </div>
+  );
+}
+
+/* ---------- Day 0: no reviewer, no hand-in — do what the lesson asks, tick its checks, move on ---------- */
+const KICKOFF_LINKS: Record<string, { href: string; label: string; icon: string }> = {
+  "kickoff.kickoff.month": { href: "/dashboard/roadmap", label: "Open My program", icon: "map" },
+  "kickoff.kickoff.kit": { href: "/dashboard/kit", label: "Open the Agent kit", icon: "smart_toy" },
+  "kickoff.kickoff.community": { href: "/dashboard/feed", label: "Say hello on the Feed", icon: "forum" },
+};
+
+function KickoffDo({ lesson: l, day, state, needsProject, onDone }: { lesson: Lesson; day: number; state: LessonState; needsProject: boolean; onDone: (d: boolean) => void }) {
+  const { pushToast } = useToast();
+  const checks = l.criteria ?? [];
+  const [ticked, setTicked] = useState<boolean[]>(() => checks.map(() => state.done));
+  const [note, setNote] = useState(state.work ?? "");
+  const [saved, setSaved] = useState<"" | "saving" | "saved">("");
+  const link = KICKOFF_LINKS[l.fid];
+  const ready = ticked.every(Boolean) && !needsProject;
+  const save = async () => {
+    if (note === (state.work ?? "")) return;
+    setSaved("saving");
+    try { await api("/api/program/progress", { action: "work", day, fid: l.fid, work: note }); setSaved("saved"); }
+    catch (e) { setSaved(""); pushToast({ variant: "error", title: e instanceof Error ? e.message : "Couldn’t save." }); }
+  };
+  return (
+    <section className="grid gap-4 rounded-2xl border border-black/[0.06] bg-white p-5 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+      <div className="grid content-start gap-3">
+        <span className={cn(kicker, "text-black/45")}>Your turn</span>
+        <p className="text-[14.5px] leading-6 text-[var(--primary)]">{l.exercise}</p>
+        {link ? <Link href={link.href} target="_blank" className="flex w-fit items-center gap-1.5 rounded-full bg-[#f1f2f3] px-3 py-1.5 text-[12.5px] font-bold text-[var(--primary)] hover:bg-[#e6e8ea]"><MaterialSymbol className="text-[16px]" name={link.icon} />{link.label}<MaterialSymbol className="text-[14px] text-black/40" name="open_in_new" /></Link> : null}
+        <label className="grid gap-1.5">
+          <span className="flex items-center justify-between text-[12px] text-black/50"><span>Your note <span className="text-black/35">· optional, just for you</span></span><span>{saved === "saving" ? "Saving…" : saved === "saved" ? "Saved" : ""}</span></span>
+          <textarea value={note} onChange={(e) => { setNote(e.target.value); setSaved(""); }} onBlur={() => void save()} rows={4} maxLength={20000} placeholder="Jot your answer here — you can come back to it later." className="w-full resize-y rounded-xl border border-black/10 bg-[#fafbfb] px-3 py-2 text-[13.5px] leading-6 outline-none focus:border-black/30" />
+        </label>
+      </div>
+      <div className="grid content-start gap-3">
+        <span className={cn(kicker, "text-black/45")}>Before you move on</span>
+        <ul className="grid gap-1.5">
+          {checks.map((c, i) => (
+            <li key={c}>
+              <button type="button" role="checkbox" aria-checked={ticked[i]} disabled={state.done} onClick={() => setTicked((t) => t.map((x, j) => (j === i ? !x : x)))} className={cn("flex w-full items-start gap-2 rounded-xl border px-3 py-2 text-left text-[13.5px] transition-colors", ticked[i] ? "border-[var(--bridge-teal)]/40 bg-[#e6f3f3] text-[#005a5a]" : "border-black/10 text-[var(--primary)] hover:border-black/30")}>
+                <MaterialSymbol className="mt-px text-[18px]" name={ticked[i] ? "check_box" : "check_box_outline_blank"} />{c}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div className="flex flex-wrap items-center gap-3 pt-1">
+          {state.done ? (
+            <button type="button" onClick={() => { setTicked(checks.map(() => false)); onDone(false); }} className="flex items-center gap-2 rounded-full border border-black/10 px-5 py-3 text-[13.5px] font-bold text-[var(--on-surface-variant)] hover:border-black/30"><MaterialSymbol className="text-[18px] text-[var(--bridge-teal)]" name="check_circle" />Completed — undo</button>
+          ) : (
+            <button type="button" disabled={!ready} onClick={() => { void save(); onDone(true); }} className="flex items-center gap-2 rounded-full bg-[var(--primary)] px-6 py-3 text-[13.5px] font-black uppercase tracking-[0.06em] text-white disabled:cursor-not-allowed disabled:bg-[#e3e5e6] disabled:text-black/60"><MaterialSymbol className="text-[18px]" name="task_alt" />Mark lesson complete</button>
+          )}
+          {!state.done && !ready ? <span className="text-[13px] text-[var(--on-surface-variant)]">{needsProject ? "Pick your project above first." : "Tick each check when it’s true."}</span> : null}
+        </div>
+      </div>
+    </section>
   );
 }

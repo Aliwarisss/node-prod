@@ -67,6 +67,10 @@ export async function POST(request: Request) {
     if (handed < keys.length) {
       return NextResponse.json({ error: `Submit every deliverable first (${keys.length - handed} left).` }, { status: 409 });
     }
+    /* the one Day 0 step the program depends on: every task after it is about the project */
+    if (body.fid === "kickoff.kickoff.project" && !progress.projectId) {
+      return NextResponse.json({ error: "Pick your project first." }, { status: 409 });
+    }
   }
 
   await ProgramProgressModel.updateOne({ userId: c.userId }, { $setOnInsert: { userId: c.userId, lessons: [], completedDays: [] } }, { upsert: true });

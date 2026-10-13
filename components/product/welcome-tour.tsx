@@ -398,7 +398,20 @@ function ActsArt() {
 
 /* five friends join, one by one — the fee falls a step each time, until it's free */
 function ReferArt() {
-  const steps = Array.from({ length: FREE_AT + 1 }, (_, k) => Math.max(0, FEE - REWARD * k));
+  /* how many friends have joined so far — stepped by the clock, so only one value is ever on screen (it doesn't lean
+     on stylesheet animations to hide the others) */
+  const [joined, setJoined] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const id = window.requestAnimationFrame(() => setJoined(FREE_AT));
+      return () => window.cancelAnimationFrame(id);
+    }
+    let n = 0;
+    const id = window.setInterval(() => { n += 1; setJoined(n); if (n >= FREE_AT) window.clearInterval(id); }, 650);
+    return () => window.clearInterval(id);
+  }, []);
+  const fee = Math.max(0, FEE - REWARD * joined);
+  const free = joined >= FREE_AT;
   return (
     <Card glow={TEAL}>
       <div className="grid w-[94%] justify-items-center gap-3 sm:gap-5 lg:w-[72%]">
@@ -406,20 +419,19 @@ function ReferArt() {
           <span className="flex size-9 items-center justify-center rounded-full bg-white text-[#0d1117] shadow-[0_0_0_4px_rgba(79,209,197,.35)] xl:size-12"><MaterialSymbol className="text-[20px] xl:text-[24px]" name="person" /></span>
           <span className="h-px w-2 bg-white/25 xl:w-4" />
           {Array.from({ length: FREE_AT }, (_, k) => (
-            <span key={k} className="wt-pop flex size-8 items-center justify-center rounded-full bg-[#4fd1c5] text-[#0d1117] xl:size-10" style={{ animationDelay: `${0.6 + k * 0.55}s` }}><MaterialSymbol className="text-[19px]" name="person_add" /></span>
-          ))}
-        </div>
-        <div className="relative grid h-[72px] w-full place-items-center overflow-hidden rounded-2xl border border-white/10 bg-[#0d1117]/80 sm:h-[92px]">
-          {steps.map((v, k) => (
-            <span key={k} className="wt-tick absolute inset-0 grid place-items-center" style={{ animationDelay: `${0.35 + k * 0.55}s`, ["--last" as string]: k === steps.length - 1 ? "1" : "0" } as CSSProperties}>
-              <span className="grid justify-items-center gap-0.5">
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">{k ? `${k} friend${k === 1 ? "" : "s"} joined` : "Your fee"}</span>
-                <b className="font-heading text-[30px] font-black leading-none tracking-[-0.04em] sm:text-[40px]" style={{ color: v ? "#fff" : "#4fd1c5" }}>{v ? pkr(v) : "FREE"}</b>
-              </span>
+            <span key={k} className="flex size-8 items-center justify-center rounded-full border-2 transition-all duration-300 xl:size-10"
+              style={k < joined ? { background: TEAL, borderColor: TEAL, color: "#0d1117", transform: "scale(1)" } : { background: "transparent", borderColor: "rgba(255,255,255,.22)", borderStyle: "dashed", color: "rgba(255,255,255,.35)", transform: "scale(.88)" }}>
+              <MaterialSymbol className="text-[18px]" name={k < joined ? "how_to_reg" : "person_add"} />
             </span>
           ))}
         </div>
-        <span className="wt-pop rounded-full px-3 py-1 font-mono text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#0d1117]" style={{ background: "#f2b705", animationDelay: "3.6s" }}>Program unlocked</span>
+        <div className="grid h-[72px] w-full place-items-center rounded-2xl border border-white/10 bg-[#0d1117]/80 sm:h-[92px]" aria-live="off">
+          <span key={joined} className="wt-in grid justify-items-center gap-0.5">
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">{joined ? `${joined} friend${joined === 1 ? "" : "s"} joined` : "Your fee"}</span>
+            <b className="font-heading text-[30px] font-black leading-none tracking-[-0.04em] sm:text-[40px]" style={{ color: free ? TEAL : "#fff" }}>{free ? "FREE" : pkr(fee)}</b>
+          </span>
+        </div>
+        <span className="rounded-full px-3 py-1 font-mono text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#0d1117] transition-all duration-500" style={{ background: "#f2b705", opacity: free ? 1 : 0, transform: free ? "none" : "translateY(6px)" }}>Program unlocked</span>
       </div>
     </Card>
   );
